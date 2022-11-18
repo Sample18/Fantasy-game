@@ -72,11 +72,6 @@ body {
   animation: ani 2.5s forwards;
 }
 
-.start_game_container_hid {
-  animation: hid 2.5s forwards;
-}
-
-
 .start_game,
 .load_game {
   cursor: pointer;
@@ -110,10 +105,10 @@ body {
   animation: ani 2.5s forwards;
 }
 
-.game_previev_hid {
-  animation: hid 2.5s forwards;
-}
-
 .game_previev h1 {
   margin: 0;
+}
+
+._hidden {
+  animation: hid 2.5s forwards;
 }
