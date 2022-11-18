@@ -112,3 +112,32 @@ body {
 ._hidden {
   animation: hid 2.5s forwards;
 }
+
+.char_select_container {
+  color: var(--textColor1);
+}
+
+.char_select_container h1 {
+  text-align: center;
+  color: var(--textColor1);
+}
+
+.char_select {
+  display: flex;
+  justify-content: space-around;
+}
+
+.chars img {
+  transition: transform 0.5s;
+}
+
+.chars:hover img {
+  transform: scale(1.1);
+  cursor: pointer;
+  transition: transform 0.25s;
+}
+
+.char_stats {
+  display: flex;
+  flex-direction: column;
+}

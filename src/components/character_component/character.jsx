@@ -1,38 +1,27 @@
-import React, { useState } from 'react';
-import charImg from '../images/characters/1.jpg'
+import React from 'react';
 
-const Character = () => {
+function Character(props) {
 
-    const [visible, setVisible] = useState(true)
-    const [style, setStyle] = useState('start_game_container')
+    const {
+        id,
+        name,
+        health,
+        mana,
+        strength,
+        agility,
+        wisdom,
+        charImg,
+    } = props
 
-    function handleGamePreviev() {
-        const gamePreviev = document.querySelector('.game_previev')
-        gamePreviev.className = 'game_previev game_previev_hid'
-        setStyle((prevState) => prevState += ' start_game_container_hid')
-        setTimeout(() => {
-            gamePreviev.remove()
-            setVisible((prevState) => prevState = false)
-        }, 2500)
-    }
+    return <div className='char_stats'>
+        <img src={charImg} height='250' width='125' />
+        <h3>{name}</h3>
+        <p>Здоровье:<span>{health}</span></p>
+        <p>Мана:<span>{mana}</span></p>
+        <p>Сила:<span>{strength}</span></p>
+        <p>Ловкость:<span>{agility}</span></p>
+        <p>Мудрость:<span>{wisdom}</span></p>
+    </div>
 
-    function renderNgMenu() {
-        return (
-            visible && <div className={style}>
-                <button className="start_game" onClick={handleGamePreviev}>Новая игра</button>
-                <button className="load_game">Загрузить</button>
-            </div>
-        )
-    }
-
-    function renderCharacter() {
-        return <img className='main_char' src={charImg} />
-    }
-
-    return (
-        <div className="character_container">
-            {renderNgMenu() || renderCharacter()}
-        </div>
-    )
 }
 export default Character
