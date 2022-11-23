@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Action from '../action_component/action';
 import GamePreviev from './game_previev';
 import CharacterSelection from '../character_component/character_selection';
 import { fetchAll } from '../../API/character_list';
+import { fetchLocation } from '../../API/location_list';
 import Character from '../character_component/character';
-
-
+import Location from './location';
+import Action from '../action_component/action';
 
 const Main = () => {
 
@@ -20,6 +20,7 @@ const Main = () => {
     })
     const [characters, setCharacters] = useState(fetchAll())
     const [character, setCharacter] = useState(null)
+    const [locations, setLocations] = useState(fetchLocation())
 
     function handleGamePreviev() {
         setStyle(prevState => prevState = {
@@ -43,32 +44,46 @@ const Main = () => {
     }
 
     function renderNgMenu() {
-        return (
-            visible.ngMenu && <div className={style.sgStyle}>
-                <button className="start_game" onClick={handleGamePreviev}>Новая игра</button>
-                <button className="load_game">Загрузить</button>
+        return visible.ngMenu &&
+            <div className={style.sgStyle}>
+                <button className="game_button" onClick={handleGamePreviev}>Новая игра</button>
+                <button className="game_button">Загрузить</button>
             </div>
-        )
     }
 
     function renderGamePreviev() {
-        return visible.gamePreviev && <GamePreviev>{style.gpStyle}</GamePreviev>
+        return visible.gamePreviev &&
+            <GamePreviev>{style.gpStyle}</GamePreviev>
     }
 
     function renderCharacterSelection() {
-        return !visible.charSelect && <CharacterSelection characters={characters} onRender={handleRenderChar} />
+        return !visible.charSelect &&
+            <CharacterSelection characters={characters} onRender={handleRenderChar} />
+    }
+
+    function renderCharacter() {
+        return visible.charSelect &&
+            <Character {...character} />
+    }
+
+    function renderLocation() {
+        return <Location {...locations[0]}/>
     }
 
     return (
         <>
             <div className="main_container">
                 <div className="world_container">
-                    {renderGamePreviev() || renderCharacterSelection()}
+                    {renderGamePreviev() || 
+                    renderCharacterSelection() ||
+                    renderLocation()}
                 </div>
-                <Action />
+                <div className="action_container">
+                    <Action {...locations[0]}/>
+                </div>
             </div>
             <div className="character_container">
-                {!visible.charSelect ? renderNgMenu() : <Character {...character} />}
+                {renderNgMenu() || renderCharacter()}
             </div>
         </>
     )
