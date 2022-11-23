@@ -1,7 +1,10 @@
 import React from 'react';
 
-const Action = () => {
-    return <div className="action_container"></div>
+function Action ({buildings}) {
+    console.log(buildings);
+    return <div>
+        {buildings.map((b, i) => <a key={i}>{b}</a>)}
+    </div>
 }
 
 export default Action

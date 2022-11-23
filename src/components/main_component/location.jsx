@@ -1,8 +1,13 @@
 import React from 'react';
-import castleImg from '../images/locations/first_castle.jpg'
 
-const Location = () => {
-    return <img src={castleImg} width='500px' />
+function Location ({id, name, description, event, locImg}) {
+
+    return <div>
+        <img src={locImg} width='500px' />
+        <h1>{name}</h1>
+        <p>{description}</p>
+        <span>{event}</span>
+    </div>
 }
 
 export default Location
