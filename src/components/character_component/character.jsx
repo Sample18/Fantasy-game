@@ -9,9 +9,10 @@ function Character({
     agility,
     wisdom,
     charImg,
+    visible,
 }) {
 
-    return <div className='char_stats'>
+    return visible &&<div className='char_stats'>
         <img src={charImg} height='250' width='125' />
         <h3>{name}</h3>
         <p>Здоровье: <span>{health}</span></p>
