@@ -1,8 +1,7 @@
 import React from 'react';
 
-function CharacterSelection({ characters, onRender }) {
-
-    return <div className='char_select_container'>
+function CharacterSelection({ characters, visible, onRender }) {
+    return visible && <div className='char_select_container'>
         <h1>Выберите персонажа</h1>
         <div className='char_select'>
             {characters.map(char =>
