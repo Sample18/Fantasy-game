@@ -25,7 +25,6 @@ const Main = () => {
     const [character, setCharacter] = useState(null)
     const [locations] = useState(fetchLocation())
     const [location, setLocation] = useState(null)
-    // const filteredLoc = locations ? locations.filter(l => l.id === 0)[0] : null
 
     function handleGamePreviev() {
         setStyle(prevState => prevState = {

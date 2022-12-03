@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function CharacterSelection({ characters, visible, onRender }) {
-    return visible && <div className='char_select_container'>
+    return visible &&
+     <div className='char_select_container'>
         <h1>Выберите персонажа</h1>
         <div className='char_select'>
             {characters.map(char =>
@@ -12,6 +14,12 @@ function CharacterSelection({ characters, visible, onRender }) {
                 </div>)}
         </div>
     </div>
+}
+
+CharacterSelection.propTypes = {
+    characters: PropTypes.array.isRequired,
+    visible: PropTypes.bool.isRequired,
+    onRender: PropTypes.func.isRequired
 }
 
 export default CharacterSelection
