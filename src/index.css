@@ -42,7 +42,6 @@ body {
 }
 
 .world_container {
-  padding-top: 10%;
   box-sizing: border-box;
   max-width: 100%;
   min-height: 70vh;
@@ -154,4 +153,37 @@ body {
 .char_stats h3,
 p {
   text-align: center;
+}
+
+.location {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  color: var(--textColor);
+}
+
+.location_h1,
+.location_p {
+  margin: 0;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.location_sp {
+  color: var(--textColor1);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.action {
+  width: fit-content;
+  cursor: pointer;
+  text-align: left;
+  color: var(--textColor);
+  margin: 0;
+  padding: 5px;
+  font-size: 18px;
 }

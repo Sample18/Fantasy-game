@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import GamePreviev from './game_previev';
 import CharacterSelection from '../character_component/character_selection';
 import { fetchAll } from '../../API/character_list';
@@ -21,9 +21,11 @@ const Main = () => {
         sgStyle: 'start_game_container',
         gpStyle: 'game_previev',
     })
-    const [characters, setCharacters] = useState(fetchAll())
+    const [characters] = useState(fetchAll())
     const [character, setCharacter] = useState(null)
-    const [locations, setLocations] = useState(fetchLocation())
+    const [locations] = useState(fetchLocation())
+    const [location, setLocation] = useState(null)
+    // const filteredLoc = locations ? locations.filter(l => l.id === 0)[0] : null
 
     function handleGamePreviev() {
         setStyle(prevState => prevState = {
@@ -49,16 +51,37 @@ const Main = () => {
         setCharacter(...char)
     }
 
+    function handleChangeLocation(build) {
+        if (typeof build === 'string') {
+            const newLoc = locations.filter(l => l.name === build)
+            return setLocation(newLoc[0])
+        }
+        return setLocation(build)
+    }
+
+    function handleChangeBack(locId) {
+        const prevLoc = locations.filter(l => l.locId === locId)
+        setLocation(prevLoc[0])
+    }
+
+    useEffect(() => {
+        if (visible.location) {setLocation(fetchLocation()[0])}
+    }, [visible.location])
+
     return (
         <>
             <div className="main_container">
                 <div className="world_container">
                     <GamePreviev style={style.gpStyle} visible={visible.gamePreviev}/>
                     <CharacterSelection characters={characters} visible={visible.charSelect} onRender={handleRenderChar} />
-                    <Location {...locations[0]} visible={visible.location}/>
+                    {location && <Location {...location} visible={visible.location}/>}
                 </div>
                 <div className="action_container">
-                    <Action {...locations[0]}/>
+                    {location && <Action
+                     {...location}
+                      onChangeLoc={handleChangeLocation}
+                      onDownLoc={handleChangeBack}
+                      />}
                 </div>
             </div>
             <div className="character_container">
